@@ -7,7 +7,7 @@
 # Data parsing using library dplyr. For memory and time saving, only a subset of data is
 # read - parameters nrows and skip of the read.table() function.
 library(dplyr)
-a<-tbl_df(read.table("household_power_consumption.txt",
+consumption<-tbl_df(read.table("household_power_consumption.txt",
                      sep = ";", 
                      col.names = c("Date", "Time", "Global_active_power",
                                    "Global_reactive_power",
@@ -22,7 +22,7 @@ a<-tbl_df(read.table("household_power_consumption.txt",
 
 # Joining date and time information into a single new row - 'datetime' stored in POSIXct format.
 # Filtering data according to specified dates (2007/2/1 - 2007/2/2).
-a <- a %>%
+consumption <- consumption %>%
     mutate(datetime = paste(Date, Time) %>% 
                strptime(format = "%d/%m/%Y %H:%M:%S") %>% 
                as.POSIXct()) %>%
@@ -32,6 +32,6 @@ Sys.setlocale("LC_TIME", "en_US.UTF-8")  # time locale changed to display Englis
 
 # Creating desired graph into the file 'plot2.jpg'.
 png(filename="plot2.png", height = 480, width = 480, bg = "transparent")
-plot(a$datetime, a$Global_active_power, pch = 46, type = "o", xlab = "",
+plot(consumption$datetime, consumption$Global_active_power, pch = 46, type = "o", xlab = "",
      ylab = "Global Active Power (kilowatts)")
 dev.off()
