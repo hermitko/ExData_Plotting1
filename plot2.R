@@ -32,6 +32,6 @@ Sys.setlocale("LC_TIME", "en_US.UTF-8")  # time locale changed to display Englis
 
 # Creating desired graph into the file 'plot2.jpg'.
 png(filename="plot2.png", height = 480, width = 480, bg = "transparent")
-plot(a$datetime, a$global_active_power, pch = 46, type = "o", xlab = "",
+plot(a$datetime, a$Global_active_power, pch = 46, type = "o", xlab = "",
      ylab = "Global Active Power (kilowatts)")
 dev.off()

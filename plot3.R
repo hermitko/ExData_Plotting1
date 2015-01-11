@@ -32,9 +32,11 @@ Sys.setlocale("LC_TIME", "en_US.UTF-8")  # time locale changed to display Englis
 
 # Creating desired graph into the file 'plot3.jpg'.
 png(filename="plot3.png", height = 480, width = 480, bg = "transparent")
-plot(a$datetime, a$sub_metering_1, pch = 46, type = "o", xlab = "", ylab = "Energy sub metering")
-lines(a$datetime, a$sub_metering_2, col = "red")
-lines(a$datetime, a$sub_metering_3, col = "blue")
-legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), 
+within(a, {
+plot(datetime, Sub_metering_1, pch = 46, type = "o", xlab = "", ylab = "Energy sub metering")
+lines(datetime, Sub_metering_2, col = "red")
+lines(datetime, Sub_metering_3, col = "blue")
+legend("topright", names(a)[7:9], 
        col = c("black", "red", "blue"), lty=1)
+})
 dev.off()
